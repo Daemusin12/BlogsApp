@@ -11,6 +11,11 @@
       <%= f.email_field :email, class: "m-4 rounded-md", autofocus: true, autocomplete: "email" %>
     </div>
 
+    <div class="flex flex-col field">
+      <%= f.label :name %>
+      <%= f.text_field :name, class: "m-4 rounded-md" %>
+    </div>
+
     <div class="field">
       <%= f.label :password %>
       <% if @minimum_password_length %>

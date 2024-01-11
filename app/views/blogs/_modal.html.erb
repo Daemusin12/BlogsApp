@@ -1,0 +1,15 @@
+<div data-modal-target="modal" class='fixed inset-0 flex items-center justify-center z-50' style="display: none;">
+    <div class='bg-white rounded-md shadow-md overflow-hidden'>
+        <div class=' flex flex-col text-lg font-semibold mb-2 w-[400px] h-[400px]'>
+            <div class='flex h-[70px] p-4 items-center justify-center text-white text-[25px]'>
+                <p class='flex grow ml-12 text-[#532f7c] items-center justify-center'>CREATE A BLOG</p>
+                <button class='h-[25px] w-[25px] flex items-center justify-center text-black' data-action="click->modal#closeModal">
+                    X
+                </button>
+              </div>
+              <div class='flex grow items-center justify-center'>
+                <%= render partial: "form", locals: {blog: @blog} %>
+              </div>
+        </div>
+    </div>
+</div>

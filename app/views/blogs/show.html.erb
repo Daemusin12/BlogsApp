@@ -1,0 +1,37 @@
+<div class="flex flex-col">
+    <div class="bg-white w-[600px] p-6 rounded-md shadow-md">
+        <h1 class="text-xl font-semibold mb-2"><%= @blog.title %></h1>
+        <div class="flex flex-row gap-4 text-[12px]">
+            <div class="text-[12px]">Posted by <%= @blog.user.name %></div>
+            <div><%= @blog.created_at.strftime("%B %e, %Y") %></div>
+            <div><%= @blog.feedbacks_count %> Feedbacks </div>
+        </div>
+        <div class="mt-2 h-[70px] overflow-hidden">
+            <p class="text-gray-600 break-all"><%= @blog.body %></p>
+        </div>
+    </div>
+    <div class="m-2">
+        <%= form_with model: Feedback.new, url: blog_feedbacks_path(@blog), data: { turbo: false } do |form| %>
+            <div class="mb-4 w-full">
+                <%= form.text_area :content, class: "form-input w-full h-[70px] items-center break-all" %>
+            </div>
+
+            <div class="flex items-center justify-between">
+                <%= form.button "Add Feedback", class: "bg-[#5B55AE] hover:bg-[#5B55A1] text-white font-bold py-2 px-4 rounded" %>
+            </div>
+        <% end %>
+    </div>
+    <div class="m-4 flex flex-col w-[500px] gap-4">
+        <% @feedbacks.each do |feedback| %>
+            <div class="bg-white p-6 rounded-md shadow-md">
+                <div class="text-[12px]">Feedback by <%= feedback.user.name %></div>
+                <div class="mt-2 h-[70px] overflow-hidden">
+                    <p class="text-gray-600 break-all"><%= feedback.content %></p>
+                </div>
+                <div class="text-[12px]"><%= feedback.created_at.strftime("%B %e, %Y") %></div>
+            </div>
+        <% end %>
+    </div>
+</div>
+
+<%= paginate @feedbacks %>

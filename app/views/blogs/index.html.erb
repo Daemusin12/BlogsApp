@@ -1,0 +1,27 @@
+<div class="flex flex-col w-[500px] h-[200px] items-center rounded-lg bg-white">
+    <%= render "blogs/title" %>
+    <div data-controller="modal">
+        <button data-action="click->modal#openModal" class="bg-[#F0F2F5] hover:bg-[#a6a8ab] text-[#5a5555] font-bold py-2 px-4 w-[300px] rounded-full">
+            <%= current_user&.name.present? ? "ADD A BLOG, #{current_user.name}!" : 'ADD A BLOG!' %>
+        </button>
+        <%= render "blogs/modal" %>
+    </div>
+</div>
+<div class="m-4 flex flex-col w-[500px] gap-4">
+    <% @blogs.each do |blog| %>
+        <div class="bg-white p-6 rounded-md shadow-md">
+            <h1 class="text-xl font-semibold mb-2"><%= blog.title %></h1>
+            <div class="flex flex-row gap-4 text-[12px]">
+                <div class="text-[12px]">Posted by <%= blog.user.name %>(<%= blog.user.email %>)</div>
+                <div><%= blog.created_at.strftime("%B %e, %Y") %></div>
+                <div><%= blog.feedbacks_count %> Feedbacks </div>
+            </div>
+            <div class="mt-2 h-[70px] overflow-hidden">
+                <p class="text-gray-600 break-all"><%= blog.body %></p>
+            </div>
+            <%= link_to 'See More', blog_path(blog), class: "mt-1 text-[12px]" %>
+        </div>
+    <% end %>
+</div>
+
+<%= paginate @blogs %>
