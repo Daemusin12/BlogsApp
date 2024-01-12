@@ -12,17 +12,8 @@
   </head>
 
   <body class="bg-[#F8F9FC]">
-      <div>
-      <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
-      <% if user_signed_in? %>
-        <%= link_to "Profile", edit_user_registration_path %>
-        <%= button_to "Log Out", destroy_user_session_path, method: :delete %>
-      <% else %>
-        <%= link_to "Log In", new_user_session_path %>
-      <% end %>
-    </div>
-    <main class="flex flex-col items-center">
+    <%= render 'shared/navbar' %>
+    <main class="flex flex-col items-center mt-[80px]">
       <%= yield %>
     </main>
   </body>
