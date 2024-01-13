@@ -1,6 +1,7 @@
 class BlogsController < ApplicationController
     before_action :authenticate_user!, except: [:index, :show]
-    before_action :set_blog, only: [:show]
+    before_action :set_blog, only: [:show, :destroy]
+    before_action :check_admin_role, only: [:destroy]
     
     def index
       @blogs = Blog.includes(:user, :feedbacks).order(created_at: :desc).page(params[:page]).per(5)
@@ -18,6 +19,11 @@ class BlogsController < ApplicationController
         render json: { errors: @blog.errors.full_messages }
       end
     end
+
+    def destroy
+      @blog.destroy
+      redirect_to blogs_path, notice: 'Blog was successfully deleted.'
+    end
   
     private
   
@@ -31,4 +37,9 @@ class BlogsController < ApplicationController
     rescue ActiveRecord::RecordNotFound
       redirect_to root_path
     end
+
+    def check_admin_role
+      redirect_to root_path, alert: 'You are not authorized to perform this action.' unless current_user&.admin?
+    end
+
 end
