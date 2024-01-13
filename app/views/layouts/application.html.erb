@@ -12,8 +12,12 @@
   </head>
 
   <body class="bg-[#F8F9FC]">
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
     <%= render 'shared/navbar' %>
     <main class="flex flex-col items-center mt-[80px]">
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
       <%= yield %>
     </main>
   </body>
