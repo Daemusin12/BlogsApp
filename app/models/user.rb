@@ -8,4 +8,7 @@ class User < ApplicationRecord
 
   has_many :blogs
   has_many :feedbacks
+
+  enum role: { user: 0, admin: 1 }
+
 end
